@@ -7,17 +7,15 @@ from datetime import date
 from crud import router as crud_router
 
 app = FastAPI()
-
-
-@app.get("/")
-def read():
-    return {"message": "Bienvenue dans ma Base 'FOMBA' "}
-
 @app.get("/")
 def root():
     return {"message": "API FOMBA en ligne"}
 
-app.include_router(crud_router, prefix="/api")
+app.include_router(crud_router, prefix="/api", tags=["CRUD"])
+
+@app.get("/")
+def read():
+    return {"message": "Bienvenue dans ma Base 'FOMBA' "}
 
 @app.get("/fomba", response_model=list[schemas.FOMBAView])
 def get_fomba(db: Session = Depends(get_db)):
