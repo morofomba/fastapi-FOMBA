@@ -2,9 +2,18 @@ from sqlalchemy.orm import Session
 from . import models, schemas
 from .models import FOMBA
 from sqlalchemy import func
-
+from fastapi import APIRouter
 #def get_all_FOMBA(db: Session):
  #   return db.query(FOMBA).all()
+
+
+
+router = APIRouter()
+
+@router.get("/items")
+def get_items():
+    return {"items": []}
+
 
 def get_all_FOMBA(db: Session, limit: int = 50):
     return (
