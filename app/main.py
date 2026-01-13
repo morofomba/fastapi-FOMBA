@@ -4,7 +4,10 @@ from . import models, schemas, crud
 from .database import get_db
 from pydantic import BaseModel
 from datetime import date
-from crud import router as crud_router
+from app.crud import router as crud_router
+from app.database import engine
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 @app.get("/")
